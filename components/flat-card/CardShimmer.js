@@ -20,7 +20,7 @@ export default function CardShimmer() {
       >
         <Skeleton h="40" />
         <Skeleton.Text px="4" />
-        <Skeleton px="4" my="4" rounded="md" startColor="primary.100" />
+        <Skeleton px="4" my="4" rounded="md" />
       </VStack>
     </Center>
   );

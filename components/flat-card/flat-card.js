@@ -12,6 +12,7 @@ import {
 } from "native-base";
 import React, { useState } from "react";
 import CardShimmer from "./CardShimmer";
+import FlatCardFallback from "../error/FlatCardFallback";
 
 const FlatCard = ({ flatLists, showShimmer }) => {
   return (
@@ -34,6 +35,8 @@ const FlatCard = ({ flatLists, showShimmer }) => {
           <CardShimmer />
           <CardShimmer />
         </HStack>
+      ) : flatLists?.length === 0 ? (
+        <FlatCardFallback />
       ) : (
         <Box display="flex" alignItems="center">
           <Flex
@@ -109,7 +112,7 @@ const FlatCard = ({ flatLists, showShimmer }) => {
                         ml="-0.5"
                         mt="-1"
                       >
-                        {flatList.area}
+                        {flatList.area}, {flatList.city}
                       </Text>
                     </Stack>
                     <Flex direction="row" justify={"space-between"}>

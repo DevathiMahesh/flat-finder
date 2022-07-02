@@ -27,10 +27,6 @@ const cityItems = [
     value: "Mumbai",
   },
   {
-    label: "Kolkata",
-    value: "Kolkata",
-  },
-  {
     label: "Hyderabad",
     value: "Hyderabad",
   },
@@ -40,10 +36,86 @@ const cityItems = [
   },
 ];
 
+const areaItems = {
+  Bangalore: [
+    {
+      label: "Marthahalli",
+      value: "Marthahalli",
+    },
+    {
+      label: "Bellandur",
+      value: "Bellandur",
+    },
+    {
+      label: "KR Puram",
+      value: "KR Puram",
+    },
+    {
+      label: "Mahadevapura",
+      value: "Mahadevapura",
+    },
+    {
+      label: "HSR Layout",
+      value: "HSR Layout",
+    },
+  ],
+  Mumbai: [
+    { label: "Andheri", value: "Andheri" },
+    { label: "Navi Mumbai", value: "Navi Mumbai" },
+    { label: "Boraveli", value: "Boraveli" },
+    { label: "Wankhede", value: "Wankhede" },
+    { label: "Amrut Nagar", value: "Amrut Nagar" },
+  ],
+  Gurgoan: [
+    {
+      label: "MG Road",
+      value: "MG Road",
+    },
+    {
+      label: "DLF City",
+      value: "DLF City",
+    },
+    {
+      label: "Arjun Nagar",
+      value: "Arjun Nagar",
+    },
+    {
+      label: "Greenwood City",
+      value: "Greenwood City",
+    },
+    {
+      label: "Farukh Nagar",
+      value: "Farukh Nagar",
+    },
+  ],
+  Hyderabad: [
+    {
+      label: "Jubliee Hills",
+      value: "Jubliee Hills",
+    },
+    {
+      label: "Sanjay Nagar",
+      value: "Sanjay Nagar",
+    },
+    {
+      label: "Gachibowli",
+      value: "Gachibowli",
+    },
+    {
+      label: "Hitech City",
+      value: "Hitech City",
+    },
+    {
+      label: "DilShuknagar",
+      value: "DilShuknagar",
+    },
+  ],
+};
+
 const menuItems = ["Profile", "Settings"];
 
 const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
-  const [searchInput, setSearchInput] = useState("");
+  const [area, setArea] = useState("");
   const [city, setCity] = useState("");
   const [menuValue, setMenuValue] = useState(null);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
@@ -81,8 +153,12 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
                   selectedValue={city}
                   minWidth="50"
                   accessibilityLabel="Select a City"
-                  placeholder="Anywhere..."
-                  onValueChange={(itemValue) => setCity(itemValue)}
+                  placeholder="Choose One..."
+                  onValueChange={(itemValue) => {
+                    setCity(itemValue);
+                    setArea("");
+                  }}
+                  mr="2"
                 >
                   {cityItems.map((cityItem) => (
                     <Select.Item
@@ -91,13 +167,22 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
                     />
                   ))}
                 </Select>
-                <Input
-                  placeholder="Enter the area..."
-                  onChange={(e) => setSearchInput(e.target.value)}
-                  value={searchInput}
-                  width="15rem"
-                />
-                <Button onPress={() => fetchFlatsOnSearch(city, searchInput)}>
+                <Select
+                  selectedValue={area}
+                  minWidth="50"
+                  accessibilityLabel="Select Area"
+                  placeholder="Choose One..."
+                  onValueChange={(itemValue) => setArea(itemValue)}
+                  mr="2"
+                >
+                  {areaItems[city]?.map((areaItem) => (
+                    <Select.Item
+                      label={areaItem.label}
+                      value={areaItem.value}
+                    />
+                  ))}
+                </Select>
+                <Button onPress={() => fetchFlatsOnSearch(city, area)}>
                   Search
                 </Button>
               </Flex>

@@ -36,7 +36,11 @@ class FlatService {
   };
 
   getFlatsOnSearch = (city, area) => {
-    const q = query(FlatCollectionRef, where("city", "==", city));
+    const q = query(
+      FlatCollectionRef,
+      where("city", "==", city),
+      where("area", "==", area)
+    );
     return getDocs(q);
   };
 }
