@@ -10,83 +10,35 @@ import {
   Stack,
   Text,
 } from 'native-base';
-import React from 'react';
-
-const flatLists = [
-  {
-    houseName: 'Mannat',
-    area: 'Bandra',
-    city: 'Mumbai',
-    size: '680sq.ft',
-    bhk: '2',
-    price: {
-      rent: 30000,
-      deposit: 150000,
-    },
-  },
-  {
-    houseName: 'Galaxy',
-    area: 'Bandra',
-    city: 'Mumbai',
-    size: '680sq.ft',
-    bhk: '2',
-    price: {
-      rent: 30000,
-      deposit: 150000,
-    },
-  },
-  {
-    houseName: 'Daisy House',
-    area: 'Bandra',
-    city: 'Mumbai',
-    size: '680sq.ft',
-    bhk: '2',
-    price: {
-      rent: 30000,
-      deposit: 150000,
-    },
-  },
-  {
-    houseName: 'Raj Avenue',
-    area: 'Bandra',
-    city: 'Mumbai',
-    size: '680sq.ft',
-    bhk: '2',
-    price: {
-      rent: 30000,
-      deposit: 150000,
-    },
-  },
-  {
-    houseName: 'SG Apartment',
-    area: 'Bandra',
-    city: 'Mumbai',
-    size: '680sq.ft',
-    bhk: '2',
-    price: {
-      rent: 30000,
-      deposit: 150000,
-    },
-  },
-  {
-    houseName: 'Balaji Homes',
-    area: 'Bandra',
-    city: 'Mumbai',
-    size: '680sq.ft',
-    bhk: '2',
-    price: {
-      rent: 30000,
-      deposit: 150000,
-    },
-  },
-];
+import React, { useEffect, useState } from 'react';
+import FlatService from '../../services/flats.services';
 
 const FlatCard = () => {
+  const [flatLists, setFlatLists] = useState([]);
+
+  const fetchFlats = async () => {
+    const flatData = await FlatService.getAllFlats().then((data) =>
+      data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+    );
+    console.log(flatData);
+    setFlatLists(flatData);
+  };
+
+  useEffect(() => {
+    fetchFlats();
+  }, []);
+
   return (
     <>
       <Divider />
       <Box alignItems="center">
-        <Flex direction="row" flexWrap={'wrap'} justify="space-around" m={'10'}>
+        <Flex
+          direction="row"
+          flexWrap={'wrap'}
+          justify="space-around"
+          mr={'-10'}
+          mt={'10'}
+        >
           {flatLists.map((flatList) => {
             return (
               <Box
@@ -107,12 +59,13 @@ const FlatCard = () => {
                   backgroundColor: 'gray.50',
                 }}
                 mb="10"
+                mr="10"
               >
                 <Box>
                   <AspectRatio w="100%" ratio={16 / 9}>
                     <Image
                       source={{
-                        uri: 'https://www.holidify.com/images/cmsuploads/compressed/Bangalore_citycover_20190613234056.jpg',
+                        uri: flatList.urls[0],
                       }}
                       alt="image"
                     />
@@ -138,7 +91,7 @@ const FlatCard = () => {
                 <Stack p="4" space={3}>
                   <Stack space={2}>
                     <Heading size="md" ml="-1">
-                      {flatList.houseName}
+                      {flatList.name}
                     </Heading>
                     <Text
                       fontSize="xs"
@@ -157,10 +110,10 @@ const FlatCard = () => {
                   </Stack>
                   <Flex direction="row" justify={'space-between'}>
                     <Text fontWeight="400">
-                      <b>&#8377; {flatList.price.rent}</b>/month
+                      <b>&#8377; {flatList.rent}</b>/month
                     </Text>
                     <Text fontWeight="400">
-                      Deposit <b>&#8377;{flatList.price.deposit}</b>
+                      Deposit <b>&#8377;{flatList.deposit}</b>
                     </Text>
                     <Text fontWeight="400">{flatList.bhk} BHK</Text>
                   </Flex>

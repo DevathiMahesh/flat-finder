@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Modal,
   Box,
@@ -8,22 +8,22 @@ import {
   FormControl,
   Input,
   Spinner,
-} from "native-base";
-import { auth } from "../../firebase.config";
+} from 'native-base';
+import { auth } from '../../firebase.config';
 import {
   signInWithPopup,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
   GoogleAuthProvider,
-} from "firebase/auth";
-import { useToast } from "native-base";
+} from 'firebase/auth';
+import { useToast } from 'native-base';
 
 export default function Login() {
   const [showModal, setShowModal] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const provider = new GoogleAuthProvider();
   const toast = useToast();
 
@@ -93,14 +93,14 @@ export default function Login() {
   };
 
   const handleGoogleLogin = () => {
-    provider.addScope("profile");
-    provider.addScope("email");
+    provider.addScope('profile');
+    provider.addScope('email');
     signInWithPopup(auth, provider)
       .then(function (result) {
         var token = result.user.accessToken;
         var user = result.user;
-        localStorage.setItem("token", token);
-        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(user));
         setShowModal(false);
         toast.show({
           render: () => {
@@ -131,8 +131,8 @@ export default function Login() {
 
   const handleLogOut = () => {
     signOut(auth);
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
     toast.show({
       render: () => {
         return (
@@ -154,7 +154,7 @@ export default function Login() {
             {showLoader && (
               <Spinner
                 size="lg"
-                style={{ position: "absolute", top: "45%", left: "45%" }}
+                style={{ position: 'absolute', top: '45%', left: '45%' }}
               />
             )}
             <Modal.Header>
@@ -198,7 +198,7 @@ export default function Login() {
       <Button onPress={() => setShowModal(true)} mb="2">
         Login / Signup
       </Button>
-      <Button onPress={handleLogOut}>Logout</Button>{" "}
+      <Button onPress={handleLogOut}>Logout</Button>{' '}
     </>
   );
 }

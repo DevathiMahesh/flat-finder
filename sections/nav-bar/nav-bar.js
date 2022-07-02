@@ -1,17 +1,21 @@
 import {
   Box,
+  Button,
   Center,
   ChevronDownIcon,
   Flex,
   HStack,
   Image,
   Input,
+  Popover,
   ScrollView,
   Select,
 } from 'native-base';
 import React, { useState } from 'react';
 import { Pressable } from 'react-native';
 import logo from '../../assets/logo.png';
+import profile from '../../assets/profile.svg';
+import Login from '../Login/Login';
 
 const cityItems = [
   {
@@ -38,6 +42,7 @@ const NavBar = () => {
   const [searchInput, setSearchInput] = useState('');
   const [city, setCity] = useState('');
   const [menuValue, setMenuValue] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   console.log('city', city);
 
@@ -74,28 +79,22 @@ const NavBar = () => {
               </Flex>
             </Center>
             <Center w="20rem">
-              <ChevronDownIcon />
-              {/* <Menu
-                w="190"
-                placement="right"
+              <Popover
                 trigger={(triggerProps) => {
-                  console.log(triggerProps);
                   return (
-                    <Pressable {...triggerProps}>
-                      <ChevronDownIcon />
-                    </Pressable>
+                    <Button {...triggerProps} colorScheme="danger">
+                      <img src={profile} alt="logo" />
+                    </Button>
                   );
                 }}
               >
-                <Menu.OptionGroup
-                  onChange={(value) => console.log(value)}
-                  value={menuValue}
-                >
-                  {menuItems.map((menu) => (
-                    <Menu.Item>{menu}</Menu.Item>
-                  ))}
-                </Menu.OptionGroup>
-              </Menu> */}
+                <Popover.Content accessibilityLabel="Delete Customerd" w="56">
+                  <Popover.Header>
+                    <Login />
+                  </Popover.Header>
+                  <Popover.Header>SignUp</Popover.Header>
+                </Popover.Content>
+              </Popover>
             </Center>
           </Flex>
         </HStack>
