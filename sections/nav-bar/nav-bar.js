@@ -3,13 +3,11 @@ import {
   Center,
   ChevronDownIcon,
   Flex,
+  HStack,
   Image,
   Input,
-  Menu,
   ScrollView,
   Select,
-  Text,
-  VStack,
 } from 'native-base';
 import React, { useState } from 'react';
 import { Pressable } from 'react-native';
@@ -44,12 +42,12 @@ const NavBar = () => {
   console.log('city', city);
 
   return (
-    <Box flex="1" safeAreaTop>
+    <Box>
       <ScrollView>
-        <VStack space={1.5} w="100%" px="0">
+        <HStack space={0} w="100%" px="0">
           <Flex direction="row" h="20" justify={'space-between'}>
             <Center w="20rem">
-              <Image source={logo} alt="logo" width={180} height={38} />
+              <Image source={logo} alt="logo" width={180} height={8} />
             </Center>
             <Center w="40rem">
               <Flex direction="row">
@@ -100,7 +98,7 @@ const NavBar = () => {
               </Menu> */}
             </Center>
           </Flex>
-        </VStack>
+        </HStack>
       </ScrollView>
     </Box>
   );

@@ -1,24 +1,9 @@
 import React from 'react';
 
-import {
-  Text,
-  Link,
-  HStack,
-  Center,
-  Heading,
-  Switch,
-  useColorMode,
-  NativeBaseProvider,
-  extendTheme,
-  VStack,
-  Box,
-<<<<<<< HEAD
-} from "native-base";
-import Login from "./Login/Login";
-=======
-} from 'native-base';
+import { Center, NativeBaseProvider, extendTheme } from 'native-base';
+import Login from './Login/Login';
 import NavBar from './Nav-Bar/nav-bar';
->>>>>>> 127ee23 (Navbar created)
+import FlatCard from '../components/flat-card/flat-card';
 
 // Define the config
 const config = {
@@ -33,14 +18,15 @@ export default function FlatFinderMain() {
   return (
     <NativeBaseProvider>
       <Center
-        _dark={{ bg: "blueGray.900" }}
-        _light={{ bg: "blueGray.50" }}
+        _dark={{ bg: 'blueGray.900' }}
+        _light={{ bg: 'blueGray.50' }}
         px={4}
         flex={1}
       >
         <Login />
       </Center>
       <NavBar />
+      <FlatCard />
     </NativeBaseProvider>
   );
 }
