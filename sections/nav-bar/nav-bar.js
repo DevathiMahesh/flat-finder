@@ -11,7 +11,7 @@ import {
   ScrollView,
   Select,
 } from "native-base";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Pressable } from "react-native";
 import logo from "../../assets/logo.png";
 import profile from "../../assets/profile.svg";
