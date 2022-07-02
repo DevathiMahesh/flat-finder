@@ -1,5 +1,5 @@
 import React from "react";
-import fallbackBanner from "../../assets/fallback-banner.png"; // with import
+import fallbackBanner from "../../assets/fallback-banner.png";
 
 function error() {
   return (
