@@ -10,27 +10,10 @@ import {
   Stack,
   Text,
 } from "native-base";
-import React, { useEffect, useState } from "react";
-import FlatService from "../../services/flats.services";
+import React, { useState } from "react";
 import CardShimmer from "./CardShimmer";
 
-const FlatCard = () => {
-  const [flatLists, setFlatLists] = useState([]);
-  const [showShimmer, setShowShimmer] = useState(true);
-
-  const fetchFlats = async () => {
-    const flatData = await FlatService.getAllFlats().then((data) =>
-      data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-    );
-    console.log(flatData);
-    setFlatLists(flatData);
-    setShowShimmer(false);
-  };
-
-  useEffect(() => {
-    fetchFlats();
-  }, []);
-
+const FlatCard = ({ flatLists, showShimmer }) => {
   return (
     <>
       <Divider />

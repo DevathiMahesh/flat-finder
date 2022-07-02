@@ -1,4 +1,4 @@
-import { db } from '../firebase.config';
+import { db } from "../firebase.config";
 import {
   collection,
   getDocs,
@@ -7,9 +7,11 @@ import {
   updateDoc,
   deleteDoc,
   doc,
-} from 'firebase/firestore';
+  query,
+  where,
+} from "firebase/firestore";
 
-const FlatCollectionRef = collection(db, 'flats');
+const FlatCollectionRef = collection(db, "flats");
 
 class FlatService {
   addFlat = (newFlat) => {
@@ -17,20 +19,25 @@ class FlatService {
   };
 
   updateFlat = (id, updatedFlat) => {
-    const existingFlat = doc(db, 'Flats', id);
+    const existingFlat = doc(db, "Flats", id);
     return updateDoc(existingFlat, updatedFlat);
   };
 
   deleteFlat = (id) => {
-    const existingFlat = doc(db, 'Flats', id);
+    const existingFlat = doc(db, "Flats", id);
     return deleteDoc(existingFlat);
   };
 
   getAllFlats = () => getDocs(FlatCollectionRef);
 
   getFlat = (id) => {
-    const existingFlat = doc(db, 'Flats', id);
+    const existingFlat = doc(db, "Flats", id);
     getDoc(existingFlat);
+  };
+
+  getFlatsOnSearch = (city, area) => {
+    const q = query(FlatCollectionRef, where("city", "==", city));
+    return getDocs(q);
   };
 }
 

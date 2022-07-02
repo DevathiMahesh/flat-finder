@@ -34,18 +34,21 @@ const cityItems = [
     label: "Hyderabad",
     value: "Hyderabad",
   },
+  {
+    label: "Gurgoan",
+    value: "Gurgoan",
+  },
 ];
 
 const menuItems = ["Profile", "Settings"];
 
-const NavBar = ({ setActivePage }) => {
+const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
   const [searchInput, setSearchInput] = useState("");
   const [city, setCity] = useState("");
   const [menuValue, setMenuValue] = useState(null);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  console.log("city", city);
   const handleLogOut = () => {
     setIsLoggedIn(false);
     signOut(auth);
@@ -94,6 +97,9 @@ const NavBar = ({ setActivePage }) => {
                   value={searchInput}
                   width="15rem"
                 />
+                <Button onPress={() => fetchFlatsOnSearch(city, searchInput)}>
+                  Search
+                </Button>
               </Flex>
             </Center>
             <Center w="20rem">
