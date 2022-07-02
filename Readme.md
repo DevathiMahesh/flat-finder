@@ -1,9 +1,3 @@
-# NativeBase Expo Template
+![flat-finder](https://user-images.githubusercontent.com/28717686/176997409-5c7b21bb-faf3-44e2-9ab5-b8c0c91923ac.png)
 
-The official NativeBase template for [Expo](https://docs.expo.io/)
 
-## Usage
-
-```sh
-expo init my-app --template @native-base/expo-template
-```
