@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 import {
   Text,
@@ -12,13 +12,18 @@ import {
   extendTheme,
   VStack,
   Box,
+<<<<<<< HEAD
 } from "native-base";
 import Login from "./Login/Login";
+=======
+} from 'native-base';
+import NavBar from './Nav-Bar/nav-bar';
+>>>>>>> 127ee23 (Navbar created)
 
 // Define the config
 const config = {
   useSystemColorMode: false,
-  initialColorMode: "dark",
+  initialColorMode: 'dark',
 };
 
 // extend the theme
@@ -35,24 +40,7 @@ export default function FlatFinderMain() {
       >
         <Login />
       </Center>
+      <NavBar />
     </NativeBaseProvider>
-  );
-}
-
-// Color Switch Component
-function ToggleDarkMode() {
-  const { colorMode, toggleColorMode } = useColorMode();
-  return (
-    <HStack space={2} alignItems="center">
-      <Text>Dark</Text>
-      <Switch
-        isChecked={colorMode === "light"}
-        onToggle={toggleColorMode}
-        aria-label={
-          colorMode === "light" ? "switch to dark mode" : "switch to light mode"
-        }
-      />
-      <Text>Light</Text>
-    </HStack>
   );
 }
