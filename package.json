@@ -14,7 +14,9 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "predeploy": "expo build:web",
+    "build": "npm run predeploy && firebase deploy --only hosting"
   },
   "dependencies": {
     "expo": "^44.0.0",
@@ -33,7 +35,6 @@
   "bugs": {
     "url": "https://github.com/GeekyAnts/nativebase-templates/issues"
   },
-  "homepage": "https://github.com/GeekyAnts/nativebase-templates#readme",
   "author": "Aditya Jamuar",
   "private": true
 }
