@@ -10,27 +10,11 @@ import {
   Stack,
   Text,
 } from "native-base";
-import React, { useEffect, useState } from "react";
-import FlatService from "../../services/flats.services";
+import React, { useState } from "react";
 import CardShimmer from "./CardShimmer";
+import FlatCardFallback from "../error/FlatCardFallback";
 
-const FlatCard = () => {
-  const [flatLists, setFlatLists] = useState([]);
-  const [showShimmer, setShowShimmer] = useState(true);
-
-  const fetchFlats = async () => {
-    const flatData = await FlatService.getAllFlats().then((data) =>
-      data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-    );
-    console.log(flatData);
-    setFlatLists(flatData);
-    setShowShimmer(false);
-  };
-
-  useEffect(() => {
-    fetchFlats();
-  }, []);
-
+const FlatCard = ({ flatLists, showShimmer }) => {
   return (
     <>
       <Divider />
@@ -51,6 +35,8 @@ const FlatCard = () => {
           <CardShimmer />
           <CardShimmer />
         </HStack>
+      ) : flatLists?.length === 0 ? (
+        <FlatCardFallback />
       ) : (
         <Box display="flex" alignItems="center">
           <Flex
@@ -126,7 +112,7 @@ const FlatCard = () => {
                         ml="-0.5"
                         mt="-1"
                       >
-                        {flatList.area}
+                        {flatList.area}, {flatList.city}
                       </Text>
                     </Stack>
                     <Flex direction="row" justify={"space-between"}>
