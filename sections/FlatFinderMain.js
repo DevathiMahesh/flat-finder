@@ -17,14 +17,6 @@ export const theme = extendTheme({ config });
 export default function FlatFinderMain() {
   return (
     <NativeBaseProvider>
-      <Center
-        _dark={{ bg: 'blueGray.900' }}
-        _light={{ bg: 'blueGray.50' }}
-        px={4}
-        flex={1}
-      >
-        <Login />
-      </Center>
       <NavBar />
       <FlatCard />
     </NativeBaseProvider>
