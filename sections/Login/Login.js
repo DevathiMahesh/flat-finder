@@ -14,7 +14,6 @@ import {
   signInWithPopup,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  signOut,
   GoogleAuthProvider,
 } from "firebase/auth";
 import { useToast } from "native-base";
