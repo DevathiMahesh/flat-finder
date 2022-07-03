@@ -20,6 +20,7 @@ import FlatCardFallback from "../error/FlatCardFallback";
 import Heart from "react-heart";
 import FlatService from "../../services/flats.services";
 import Gallery from "./Gallery";
+import { getLoggedInStatus } from "../../utils/flats.utils";
 
 const HeartComponent = ({ flatObj }) => {
   const [currentLikes, setCurrentLikes] = useState(flatObj.likes ?? 0);
@@ -87,6 +88,7 @@ const FlatCard = ({ flatLists, showShimmer }) => {
     setRange({ start: pageNum * pageSize, end: pageNum * pageSize + pageSize });
   };
   const [galleryUrls, setShowGalleryUrls] = useState([]);
+  const isLoggedIn = getLoggedInStatus();
 
   return (
     <>
@@ -192,18 +194,27 @@ const FlatCard = ({ flatLists, showShimmer }) => {
                           {flatList.area}, {flatList.city}
                         </Text>
                       </VStack>
-                      <Box>
-                        <HeartComponent flatObj={flatList} key={flatList?.id} />
-                      </Box>
+                      {isLoggedIn && (
+                        <Box>
+                          <HeartComponent
+                            flatObj={flatList}
+                            key={flatList?.id}
+                          />
+                        </Box>
+                      )}
                     </HStack>
                     <Flex direction="row" justify={"space-between"}>
                       <Text fontWeight="400">
-                        <b>&#8377; {flatList.rent}</b>/month
+                        <b>&#8377; {isLoggedIn ? flatList.rent : "XXXX"}</b>
+                        /month
                       </Text>
                       <Text fontWeight="400">
-                        Deposit <b>&#8377;{flatList.deposit}</b>
+                        Deposit{" "}
+                        <b>&#8377;{isLoggedIn ? flatList.deposit : "XXXXX"}</b>
                       </Text>
-                      <Text fontWeight="400">{flatList.bhk} BHK</Text>
+                      <Text fontWeight="400">
+                        {isLoggedIn ? flatList.bhk : "X"} BHK
+                      </Text>
                     </Flex>
                     <HStack
                       alignItems="center"
@@ -222,15 +233,17 @@ const FlatCard = ({ flatLists, showShimmer }) => {
                             }}
                             fontWeight="400"
                           >
-                            6 mins ago
+                            {isLoggedIn ? "6" : "X"} mins ago
                           </Text>
                         </Box>
-                        <Box>
-                          <AvailableComp
-                            isAvailable={flatList?.available}
-                            flatObj={flatList}
-                          />
-                        </Box>
+                        {isLoggedIn && (
+                          <Box>
+                            <AvailableComp
+                              isAvailable={flatList?.available}
+                              flatObj={flatList}
+                            />
+                          </Box>
+                        )}
                       </HStack>
                     </HStack>
                   </Stack>

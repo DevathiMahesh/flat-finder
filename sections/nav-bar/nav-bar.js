@@ -45,6 +45,7 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
         );
       },
     });
+    window.location.reload();
   };
 
   useEffect(() => {

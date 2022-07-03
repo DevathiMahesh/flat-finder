@@ -110,3 +110,7 @@ export const areaItems = {
 };
 
 export const menuItems = ["Profile", "Settings"];
+
+export const getLoggedInStatus = () => {
+  return localStorage.getItem("token") ? true : false;
+};
