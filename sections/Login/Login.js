@@ -42,6 +42,7 @@ export default function Login({ setShowSignUpModal, setIsLoggedIn }) {
             );
           },
         });
+        window.location.reload();
       })
       .catch((_) => {
         toast.show({
@@ -55,6 +56,7 @@ export default function Login({ setShowSignUpModal, setIsLoggedIn }) {
             );
           },
         });
+        window.location.reload();
       });
     setShowLoader(false);
   };
@@ -75,6 +77,7 @@ export default function Login({ setShowSignUpModal, setIsLoggedIn }) {
             );
           },
         });
+        window.location.reload();
       })
       .catch((_) => {
         toast.show({
@@ -88,6 +91,7 @@ export default function Login({ setShowSignUpModal, setIsLoggedIn }) {
             );
           },
         });
+        window.location.reload();
       });
     setShowLoader(false);
   };
@@ -114,6 +118,7 @@ export default function Login({ setShowSignUpModal, setIsLoggedIn }) {
             );
           },
         });
+        window.location.reload();
       })
       .catch((_) => {
         toast.show({
@@ -127,6 +132,7 @@ export default function Login({ setShowSignUpModal, setIsLoggedIn }) {
             );
           },
         });
+        window.location.reload();
       });
   };
 
