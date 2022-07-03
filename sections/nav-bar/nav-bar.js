@@ -10,122 +10,122 @@ import {
   Popover,
   ScrollView,
   Select,
-} from "native-base";
-import React, { useEffect, useState } from "react";
-import { Pressable } from "react-native";
-import logo from "../../assets/logo.png";
-import profile from "../../assets/profile.svg";
-import Login from "../Login/Login";
+} from 'native-base';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Pressable } from 'react-native';
+import logo from '../../assets/logo.png';
+import profile from '../../assets/profile.svg';
+import Login from '../Login/Login';
 
 const cityItems = [
   {
-    label: "Bangalore",
-    value: "Bangalore",
+    label: 'Bangalore',
+    value: 'Bangalore',
   },
   {
-    label: "Mumbai",
-    value: "Mumbai",
+    label: 'Mumbai',
+    value: 'Mumbai',
   },
   {
-    label: "Hyderabad",
-    value: "Hyderabad",
+    label: 'Hyderabad',
+    value: 'Hyderabad',
   },
   {
-    label: "Gurgoan",
-    value: "Gurgoan",
+    label: 'Gurgoan',
+    value: 'Gurgoan',
   },
 ];
 
 const areaItems = {
   Bangalore: [
     {
-      label: "Marthahalli",
-      value: "Marthahalli",
+      label: 'Marthahalli',
+      value: 'Marthahalli',
     },
     {
-      label: "Bellandur",
-      value: "Bellandur",
+      label: 'Bellandur',
+      value: 'Bellandur',
     },
     {
-      label: "KR Puram",
-      value: "KR Puram",
+      label: 'KR Puram',
+      value: 'KR Puram',
     },
     {
-      label: "Mahadevapura",
-      value: "Mahadevapura",
+      label: 'Mahadevapura',
+      value: 'Mahadevapura',
     },
     {
-      label: "HSR Layout",
-      value: "HSR Layout",
+      label: 'HSR Layout',
+      value: 'HSR Layout',
     },
   ],
   Mumbai: [
-    { label: "Andheri", value: "Andheri" },
-    { label: "Navi Mumbai", value: "Navi Mumbai" },
-    { label: "Boraveli", value: "Boraveli" },
-    { label: "Wankhede", value: "Wankhede" },
-    { label: "Amrut Nagar", value: "Amrut Nagar" },
+    { label: 'Andheri', value: 'Andheri' },
+    { label: 'Navi Mumbai', value: 'Navi Mumbai' },
+    { label: 'Boraveli', value: 'Boraveli' },
+    { label: 'Wankhede', value: 'Wankhede' },
+    { label: 'Amrut Nagar', value: 'Amrut Nagar' },
   ],
   Gurgoan: [
     {
-      label: "MG Road",
-      value: "MG Road",
+      label: 'MG Road',
+      value: 'MG Road',
     },
     {
-      label: "DLF City",
-      value: "DLF City",
+      label: 'DLF City',
+      value: 'DLF City',
     },
     {
-      label: "Arjun Nagar",
-      value: "Arjun Nagar",
+      label: 'Arjun Nagar',
+      value: 'Arjun Nagar',
     },
     {
-      label: "Greenwood City",
-      value: "Greenwood City",
+      label: 'Greenwood City',
+      value: 'Greenwood City',
     },
     {
-      label: "Farukh Nagar",
-      value: "Farukh Nagar",
+      label: 'Farukh Nagar',
+      value: 'Farukh Nagar',
     },
   ],
   Hyderabad: [
     {
-      label: "Jubliee Hills",
-      value: "Jubliee Hills",
+      label: 'Jubliee Hills',
+      value: 'Jubliee Hills',
     },
     {
-      label: "Sanjay Nagar",
-      value: "Sanjay Nagar",
+      label: 'Sanjay Nagar',
+      value: 'Sanjay Nagar',
     },
     {
-      label: "Gachibowli",
-      value: "Gachibowli",
+      label: 'Gachibowli',
+      value: 'Gachibowli',
     },
     {
-      label: "Hitech City",
-      value: "Hitech City",
+      label: 'Hitech City',
+      value: 'Hitech City',
     },
     {
-      label: "DilShuknagar",
-      value: "DilShuknagar",
+      label: 'DilShuknagar',
+      value: 'DilShuknagar',
     },
   ],
 };
 
-const menuItems = ["Profile", "Settings"];
+const menuItems = ['Profile', 'Settings'];
 
 const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
-  const [area, setArea] = useState("");
-  const [city, setCity] = useState("");
-  const [menuValue, setMenuValue] = useState(null);
+  const [area, setArea] = useState('');
+  const [city, setCity] = useState('');
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogOut = () => {
     setIsLoggedIn(false);
     signOut(auth);
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
     toast.show({
       render: () => {
         return (
@@ -139,11 +139,17 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
     });
   };
 
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   return (
     <Box>
       <ScrollView>
         <HStack space={0} w="100%" px="0">
-          <Flex direction="row" h="20" justify={"space-between"}>
+          <Flex direction="row" h="20" justify={'space-between'}>
             <Center w="20rem">
               <Image
                 source={logo}
@@ -163,14 +169,15 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
                   placeholder="Choose One..."
                   onValueChange={(itemValue) => {
                     setCity(itemValue);
-                    setArea("");
+                    setArea('');
                   }}
                   mr="2"
                 >
-                  {cityItems.map((cityItem) => (
+                  {cityItems.map((cityItem, index) => (
                     <Select.Item
                       label={cityItem.label}
                       value={cityItem.value}
+                      key={index}
                     />
                   ))}
                 </Select>
@@ -194,11 +201,27 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
                 </Button>
               </Flex>
             </Center>
+            <Center w="80px">
+              <Button colorScheme={'red'}>
+                <Link
+                  to="/create-post"
+                  style={{ textDecoration: 'none', color: 'white' }}
+                >
+                  Add Post
+                </Link>
+              </Button>
+            </Center>
             <Center w="20rem">
               <Popover
                 trigger={(triggerProps) => {
                   return (
-                    <Button {...triggerProps} colorScheme="danger">
+                    <Button
+                      {...triggerProps}
+                      colorScheme="white"
+                      style={{
+                        border: '1.5px solid #ff585d',
+                      }}
+                    >
                       <img src={profile} alt="logo" />
                     </Button>
                   );
@@ -210,7 +233,7 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
                       <>
                         <Button
                           onPress={() => {
-                            setActivePage("profile");
+                            setActivePage('profile');
                           }}
                           mb="2"
                         >
