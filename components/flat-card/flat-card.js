@@ -13,12 +13,12 @@ import {
   VStack,
   Switch,
   Badge,
-} from "native-base";
-import React, { useState } from "react";
-import CardShimmer from "./CardShimmer";
-import FlatCardFallback from "../error/FlatCardFallback";
-import Heart from "react-heart";
-import FlatService from "../../services/flats.services";
+} from 'native-base';
+import React, { useState } from 'react';
+import CardShimmer from './CardShimmer';
+import FlatCardFallback from '../error/FlatCardFallback';
+import Heart from 'react-heart';
+import FlatService from '../../services/flats.services';
 
 const HeartComponent = ({ flatObj }) => {
   const [currentLikes, setCurrentLikes] = useState(flatObj.likes ?? 0);
@@ -29,7 +29,7 @@ const HeartComponent = ({ flatObj }) => {
   return (
     <>
       <Flex
-        style={{ width: "1rem" }}
+        style={{ width: '1rem' }}
         direction="column"
         justify="center"
         alignItems="center"
@@ -61,8 +61,8 @@ const AvailableComp = ({ isAvailable, flatObj }) => {
   };
   return (
     <Flex direction="row" justify="center" alignItems="center" ml="55px">
-      <Badge mr={2} colorScheme={currentAvailable ? "success" : "danger"}>
-        {currentAvailable ? "Available" : "Not Available"}
+      <Badge mr={2} colorScheme={currentAvailable ? 'success' : 'danger'}>
+        {currentAvailable ? 'Available' : 'Not Available'}
       </Badge>
       {currentAvailable && (
         <Switch
@@ -92,10 +92,10 @@ const FlatCard = ({ flatLists, showShimmer }) => {
       {showShimmer ? (
         <HStack
           direction="row"
-          flexWrap={"wrap"}
+          flexWrap={'wrap'}
           justify="space-around"
-          mr={"-10"}
-          mt={"10"}
+          ml="10"
+          mt={'10'}
         >
           <CardShimmer />
           <CardShimmer />
@@ -112,10 +112,10 @@ const FlatCard = ({ flatLists, showShimmer }) => {
         <Box display="flex" alignItems="center">
           <Flex
             direction="row"
-            flexWrap={"wrap"}
+            flexWrap={'wrap'}
             justify="space-around"
-            mr={"-10"}
-            mt={"10"}
+            ml={'10'}
+            mt={'10'}
           >
             {flatLists.slice(range.start, range.end).map((flatList) => {
               return (
@@ -127,15 +127,15 @@ const FlatCard = ({ flatLists, showShimmer }) => {
                   borderColor="coolGray.200"
                   borderWidth="1"
                   _dark={{
-                    borderColor: "coolGray.600",
-                    backgroundColor: "gray.700",
+                    borderColor: 'coolGray.600',
+                    backgroundColor: 'gray.700',
                   }}
                   _web={{
                     shadow: 2,
                     borderWidth: 0,
                   }}
                   _light={{
-                    backgroundColor: "gray.50",
+                    backgroundColor: 'gray.50',
                   }}
                   mb="10"
                   mr="10"
@@ -152,12 +152,12 @@ const FlatCard = ({ flatLists, showShimmer }) => {
                     <Center
                       bg="red.500"
                       _dark={{
-                        bg: "red.400",
+                        bg: 'red.400',
                       }}
                       _text={{
-                        color: "red.50",
-                        fontWeight: "700",
-                        fontSize: "xs",
+                        color: 'red.50',
+                        fontWeight: '700',
+                        fontSize: 'xs',
                       }}
                       position="absolute"
                       bottom="0"
@@ -176,10 +176,10 @@ const FlatCard = ({ flatLists, showShimmer }) => {
                         <Text
                           fontSize="xs"
                           _light={{
-                            color: "red.500",
+                            color: 'red.500',
                           }}
                           _dark={{
-                            color: "red.400",
+                            color: 'red.400',
                           }}
                           fontWeight="500"
                           ml="-0.5"
@@ -192,7 +192,7 @@ const FlatCard = ({ flatLists, showShimmer }) => {
                         <HeartComponent flatObj={flatList} key={flatList?.id} />
                       </Box>
                     </HStack>
-                    <Flex direction="row" justify={"space-between"}>
+                    <Flex direction="row" justify={'space-between'}>
                       <Text fontWeight="400">
                         <b>&#8377; {flatList.rent}</b>/month
                       </Text>
@@ -214,7 +214,7 @@ const FlatCard = ({ flatLists, showShimmer }) => {
                           <Text
                             color="coolGray.600"
                             _dark={{
-                              color: "warmGray.200",
+                              color: 'warmGray.200',
                             }}
                             fontWeight="400"
                           >
@@ -234,7 +234,7 @@ const FlatCard = ({ flatLists, showShimmer }) => {
               );
             })}
           </Flex>
-          <Flex direction="row" flexWrap={"wrap"} mb={3}>
+          <Flex direction="row" flexWrap={'wrap'} mb={3}>
             {[...Array(totalPages)].map((page, index) => {
               return (
                 <Button
@@ -243,7 +243,7 @@ const FlatCard = ({ flatLists, showShimmer }) => {
                   }}
                   mr={2}
                   variant={
-                    range.start === index * pageSize ? "solid" : "outline"
+                    range.start === index * pageSize ? 'solid' : 'outline'
                   }
                 >
                   {index + 1}
