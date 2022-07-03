@@ -133,7 +133,7 @@ const UploadForm = () => {
               <FormControl.ErrorMessage>Error</FormControl.ErrorMessage>
             ) : (
               <FormControl.HelperText>
-                Area should contain atleast 3 character.
+                Area should contain atleast 2 character.
               </FormControl.HelperText>
             )}
             <FormControl.Label
@@ -169,7 +169,7 @@ const UploadForm = () => {
               <FormControl.ErrorMessage>Error</FormControl.ErrorMessage>
             ) : (
               <FormControl.HelperText>
-                Rent should contain atleast 3 character.
+                Rent should have atleast 1 character.
               </FormControl.HelperText>
             )}
             <FormControl.Label
@@ -205,7 +205,7 @@ const UploadForm = () => {
               <FormControl.ErrorMessage>Error</FormControl.ErrorMessage>
             ) : (
               <FormControl.HelperText>
-                size should contain atleast 3 character.
+                Size should contain atleast 3 character.
               </FormControl.HelperText>
             )}
             <FormControl.Label
