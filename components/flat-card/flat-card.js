@@ -19,6 +19,7 @@ import CardShimmer from "./CardShimmer";
 import FlatCardFallback from "../error/FlatCardFallback";
 import Heart from "react-heart";
 import FlatService from "../../services/flats.services";
+import Gallery from "./Gallery";
 
 const HeartComponent = ({ flatObj }) => {
   const [currentLikes, setCurrentLikes] = useState(flatObj.likes ?? 0);
@@ -85,6 +86,7 @@ const FlatCard = ({ flatLists, showShimmer }) => {
   const onPageChange = (pageNum) => {
     setRange({ start: pageNum * pageSize, end: pageNum * pageSize + pageSize });
   };
+  const [galleryUrls, setShowGalleryUrls] = useState([]);
 
   return (
     <>
@@ -147,6 +149,8 @@ const FlatCard = ({ flatLists, showShimmer }) => {
                           uri: flatList.urls[0],
                         }}
                         alt="image"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => setShowGalleryUrls(flatList.urls)}
                       />
                     </AspectRatio>
                     <Center
@@ -251,6 +255,11 @@ const FlatCard = ({ flatLists, showShimmer }) => {
               );
             })}
           </Flex>
+        </Box>
+      )}
+      {galleryUrls?.length > 0 && (
+        <Box style={{ position: "absolute", top: "50px" }}>
+          <Gallery urls={galleryUrls} setShowGalleryUrls={setShowGalleryUrls} />
         </Box>
       )}
     </>

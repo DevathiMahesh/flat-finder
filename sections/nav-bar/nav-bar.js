@@ -10,122 +10,25 @@ import {
   Popover,
   ScrollView,
   Select,
-} from 'native-base';
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Pressable } from 'react-native';
-import logo from '../../assets/logo.png';
-import profile from '../../assets/profile.svg';
-import Login from '../Login/Login';
-
-const cityItems = [
-  {
-    label: 'Bangalore',
-    value: 'Bangalore',
-  },
-  {
-    label: 'Mumbai',
-    value: 'Mumbai',
-  },
-  {
-    label: 'Hyderabad',
-    value: 'Hyderabad',
-  },
-  {
-    label: 'Gurgoan',
-    value: 'Gurgoan',
-  },
-];
-
-const areaItems = {
-  Bangalore: [
-    {
-      label: 'Marthahalli',
-      value: 'Marthahalli',
-    },
-    {
-      label: 'Bellandur',
-      value: 'Bellandur',
-    },
-    {
-      label: 'KR Puram',
-      value: 'KR Puram',
-    },
-    {
-      label: 'Mahadevapura',
-      value: 'Mahadevapura',
-    },
-    {
-      label: 'HSR Layout',
-      value: 'HSR Layout',
-    },
-  ],
-  Mumbai: [
-    { label: 'Andheri', value: 'Andheri' },
-    { label: 'Navi Mumbai', value: 'Navi Mumbai' },
-    { label: 'Boraveli', value: 'Boraveli' },
-    { label: 'Wankhede', value: 'Wankhede' },
-    { label: 'Amrut Nagar', value: 'Amrut Nagar' },
-  ],
-  Gurgoan: [
-    {
-      label: 'MG Road',
-      value: 'MG Road',
-    },
-    {
-      label: 'DLF City',
-      value: 'DLF City',
-    },
-    {
-      label: 'Arjun Nagar',
-      value: 'Arjun Nagar',
-    },
-    {
-      label: 'Greenwood City',
-      value: 'Greenwood City',
-    },
-    {
-      label: 'Farukh Nagar',
-      value: 'Farukh Nagar',
-    },
-  ],
-  Hyderabad: [
-    {
-      label: 'Jubliee Hills',
-      value: 'Jubliee Hills',
-    },
-    {
-      label: 'Sanjay Nagar',
-      value: 'Sanjay Nagar',
-    },
-    {
-      label: 'Gachibowli',
-      value: 'Gachibowli',
-    },
-    {
-      label: 'Hitech City',
-      value: 'Hitech City',
-    },
-    {
-      label: 'DilShuknagar',
-      value: 'DilShuknagar',
-    },
-  ],
-};
-
-const menuItems = ['Profile', 'Settings'];
+} from "native-base";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Pressable } from "react-native";
+import logo from "../../assets/logo.png";
+import profile from "../../assets/profile.svg";
+import Login from "../Login/Login";
+import { cityItems, areaItems, menuItems } from "../../utils/flats.utils";
 
 const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
-  const [area, setArea] = useState('');
-  const [city, setCity] = useState('');
+  const [area, setArea] = useState("");
+  const [city, setCity] = useState("");
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogOut = () => {
     setIsLoggedIn(false);
     signOut(auth);
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
+    localStorage.clear();
     toast.show({
       render: () => {
         return (
@@ -140,7 +43,7 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem('token')) {
+    if (localStorage.getItem("token")) {
       setIsLoggedIn(true);
     }
   }, []);
@@ -149,7 +52,7 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
     <Box>
       <ScrollView>
         <HStack space={0} w="100%" px="0">
-          <Flex direction="row" h="20" justify={'space-between'}>
+          <Flex direction="row" h="20" justify={"space-between"}>
             <Center w="20rem">
               <Image
                 source={logo}
@@ -169,7 +72,7 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
                   placeholder="Choose One..."
                   onValueChange={(itemValue) => {
                     setCity(itemValue);
-                    setArea('');
+                    setArea("");
                   }}
                   mr="2"
                 >
@@ -202,10 +105,10 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
               </Flex>
             </Center>
             <Center w="80px">
-              <Button colorScheme={'red'}>
+              <Button colorScheme={"red"}>
                 <Link
                   to="/create-post"
-                  style={{ textDecoration: 'none', color: 'white' }}
+                  style={{ textDecoration: "none", color: "white" }}
                 >
                   Add Post
                 </Link>
@@ -219,7 +122,7 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
                       {...triggerProps}
                       colorScheme="white"
                       style={{
-                        border: '1.5px solid #ff585d',
+                        border: "1.5px solid #ff585d",
                       }}
                     >
                       <img src={profile} alt="logo" />
@@ -233,7 +136,7 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
                       <>
                         <Button
                           onPress={() => {
-                            setActivePage('profile');
+                            setActivePage("profile");
                           }}
                           mb="2"
                         >

@@ -1,4 +1,4 @@
-import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import {
   Button,
   Center,
@@ -9,11 +9,12 @@ import {
   NativeBaseProvider,
   useToast,
   VStack,
-} from 'native-base';
-import React, { useState } from 'react';
-import FlatService from '../../services/flats.services';
-import { storage } from '../../firebase.config';
-import { Navigate } from 'react-router-dom';
+  Select,
+} from "native-base";
+import React, { useState } from "react";
+import FlatService from "../../services/flats.services";
+import { storage } from "../../firebase.config";
+import { Navigate } from "react-router-dom";
 
 const UploadForm = () => {
   const [formData, setData] = React.useState({});
@@ -26,10 +27,10 @@ const UploadForm = () => {
 
   const validate = () => {
     if (formData.name === undefined) {
-      setErrors({ ...errors, name: 'Name is required' });
+      setErrors({ ...errors, name: "Name is required" });
       return false;
     } else if (formData.name.length < 3) {
-      setErrors({ ...errors, name: 'Name is too short' });
+      setErrors({ ...errors, name: "Name is too short" });
       return false;
     }
 
@@ -45,7 +46,7 @@ const UploadForm = () => {
     console.log(uploadTask.snapshot.state);
 
     uploadTask.on(
-      'state_changed',
+      "state_changed",
       (snapshot) => {
         const percent = Math.round(
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
@@ -79,13 +80,13 @@ const UploadForm = () => {
     if (validate()) {
       const res = FlatService.addFlat(fullFormData);
       toast.show({
-        title: 'Hurray! Your ad is posted...',
-        placement: 'top',
+        title: "Hurray! Your ad is posted...",
+        placement: "top",
       });
       setIsSubmitted(true);
     } else {
       toast.show({
-        title: 'Sorry! There was some issue with your form. Try again.',
+        title: "Sorry! There was some issue with your form. Try again.",
       });
     }
   };
@@ -94,12 +95,12 @@ const UploadForm = () => {
     <NativeBaseProvider>
       <Center flex={1} m="5">
         {isSubmitted && <Navigate replace to="/home" />}
-        <Heading mb="4" style={{ color: '#ff585d' }}>
+        <Heading mb="4" style={{ color: "#ff585d" }}>
           Put your Home on Rent
         </Heading>
         <Divider />
         <VStack width="90%" mx="3" maxW="300px" mt="2">
-          <FormControl isRequired isInvalid={'name' in errors}>
+          <FormControl isRequired isInvalid={"name" in errors}>
             <FormControl.Label
               _text={{
                 bold: true,
@@ -111,7 +112,7 @@ const UploadForm = () => {
               placeholder="John"
               onChangeText={(value) => setData({ ...formData, name: value })}
             />
-            {'name' in errors ? (
+            {"name" in errors ? (
               <FormControl.ErrorMessage>Error</FormControl.ErrorMessage>
             ) : (
               <FormControl.HelperText>
@@ -129,7 +130,7 @@ const UploadForm = () => {
               placeholder="Indira Nagar"
               onChangeText={(value) => setData({ ...formData, area: value })}
             />
-            {'area' in errors ? (
+            {"area" in errors ? (
               <FormControl.ErrorMessage>Error</FormControl.ErrorMessage>
             ) : (
               <FormControl.HelperText>
@@ -147,7 +148,7 @@ const UploadForm = () => {
               placeholder="Bangalore"
               onChangeText={(value) => setData({ ...formData, city: value })}
             />
-            {'city' in errors ? (
+            {"city" in errors ? (
               <FormControl.ErrorMessage>Error</FormControl.ErrorMessage>
             ) : (
               <FormControl.HelperText>
@@ -165,7 +166,7 @@ const UploadForm = () => {
               placeholder="10000"
               onChangeText={(value) => setData({ ...formData, rent: value })}
             />
-            {'rent' in errors ? (
+            {"rent" in errors ? (
               <FormControl.ErrorMessage>Error</FormControl.ErrorMessage>
             ) : (
               <FormControl.HelperText>
@@ -183,7 +184,7 @@ const UploadForm = () => {
               placeholder="50000"
               onChangeText={(value) => setData({ ...formData, deposit: value })}
             />
-            {'deposit' in errors ? (
+            {"deposit" in errors ? (
               <FormControl.ErrorMessage>Error</FormControl.ErrorMessage>
             ) : (
               <FormControl.HelperText>
@@ -201,7 +202,7 @@ const UploadForm = () => {
               placeholder="500"
               onChangeText={(value) => setData({ ...formData, size: value })}
             />
-            {'size' in errors ? (
+            {"size" in errors ? (
               <FormControl.ErrorMessage>Error</FormControl.ErrorMessage>
             ) : (
               <FormControl.HelperText>
@@ -219,7 +220,7 @@ const UploadForm = () => {
               placeholder="2"
               onChangeText={(value) => setData({ ...formData, bhk: value })}
             />
-            {'bhk' in errors ? (
+            {"bhk" in errors ? (
               <FormControl.ErrorMessage>Error</FormControl.ErrorMessage>
             ) : (
               <FormControl.HelperText>
@@ -234,14 +235,14 @@ const UploadForm = () => {
               Images
             </FormControl.Label>
             <input
-              type={'file'}
+              type={"file"}
               placeholder="Choose Files"
               onChange={(e) => setImage(e.target.files[0])}
-              style={{ marginBottom: '10px' }}
+              style={{ marginBottom: "10px" }}
             />
             {percent !== null && (
-              <p style={{ marginBottom: '10px' }}>
-                {percent}% {percent === 100 && 'done'}
+              <p style={{ marginBottom: "10px" }}>
+                {percent}% {percent === 100 && "done"}
               </p>
             )}
             <Button onPress={fileUploadHandler}>Upload Image</Button>
