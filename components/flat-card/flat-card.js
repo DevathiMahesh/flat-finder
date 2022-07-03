@@ -13,14 +13,16 @@ import {
   VStack,
   Switch,
   Badge,
-} from "native-base";
-import React, { useState } from "react";
-import CardShimmer from "./CardShimmer";
-import FlatCardFallback from "../error/FlatCardFallback";
-import Heart from "react-heart";
-import FlatService from "../../services/flats.services";
-import Gallery from "./Gallery";
-import { getLoggedInStatus } from "../../utils/flats.utils";
+  Icon,
+} from 'native-base';
+import React, { useState } from 'react';
+import CardShimmer from './CardShimmer';
+import FlatCardFallback from '../error/FlatCardFallback';
+import Heart from 'react-heart';
+import FlatService from '../../services/flats.services';
+import Gallery from './Gallery';
+import { getLoggedInStatus } from '../../utils/flats.utils';
+import { AntDesign } from '@expo/vector-icons';
 
 const HeartComponent = ({ flatObj }) => {
   const [currentLikes, setCurrentLikes] = useState(flatObj.likes ?? 0);
@@ -31,13 +33,14 @@ const HeartComponent = ({ flatObj }) => {
   return (
     <>
       <Flex
-        style={{ width: "1rem" }}
+        style={{ width: '1rem' }}
         direction="column"
         justify="center"
         alignItems="center"
       >
-        <Heart
-          isActive={isClick}
+        <Icon
+          as={AntDesign}
+          name="heart"
           onClick={() => {
             if (isClick) {
               setCurrentLikes(currentLikes - 1);
@@ -46,10 +49,14 @@ const HeartComponent = ({ flatObj }) => {
               setCurrentLikes(currentLikes + 1);
               handleUpdateLikes(currentLikes + 1);
             }
-
             setClick(!isClick);
           }}
+          color={!isClick ? 'coolGray.800' : 'emerald.500'}
+          // _dark={{
+          //   color: 'warmGray.50',
+          // }}
         />
+
         <Text>{currentLikes}</Text>
       </Flex>
     </>
@@ -63,8 +70,8 @@ const AvailableComp = ({ isAvailable, flatObj }) => {
   };
   return (
     <Flex direction="row" justify="center" alignItems="center" ml="55px">
-      <Badge mr={2} colorScheme={currentAvailable ? "success" : "danger"}>
-        {currentAvailable ? "Available" : "Not Available"}
+      <Badge mr={2} colorScheme={currentAvailable ? 'success' : 'danger'}>
+        {currentAvailable ? 'Available' : 'Not Available'}
       </Badge>
       {currentAvailable && (
         <Switch
@@ -96,10 +103,10 @@ const FlatCard = ({ flatLists, showShimmer }) => {
       {showShimmer ? (
         <HStack
           direction="row"
-          flexWrap={"wrap"}
+          flexWrap={'wrap'}
           justify="space-around"
           ml="10"
-          mt={"10"}
+          mt={'10'}
         >
           <CardShimmer />
           <CardShimmer />
@@ -116,10 +123,10 @@ const FlatCard = ({ flatLists, showShimmer }) => {
         <Box display="flex" alignItems="center">
           <Flex
             direction="row"
-            flexWrap={"wrap"}
+            flexWrap={'wrap'}
             justify="space-around"
-            ml={"10"}
-            mt={"10"}
+            ml={'10'}
+            mt={'10'}
           >
             {flatLists.slice(range.start, range.end).map((flatList) => {
               return (
@@ -131,15 +138,15 @@ const FlatCard = ({ flatLists, showShimmer }) => {
                   borderColor="coolGray.200"
                   borderWidth="1"
                   _dark={{
-                    borderColor: "coolGray.600",
-                    backgroundColor: "gray.700",
+                    borderColor: 'coolGray.600',
+                    backgroundColor: 'gray.700',
                   }}
                   _web={{
                     shadow: 2,
                     borderWidth: 0,
                   }}
                   _light={{
-                    backgroundColor: "gray.50",
+                    backgroundColor: 'gray.50',
                   }}
                   mb="10"
                   mr="10"
@@ -151,19 +158,19 @@ const FlatCard = ({ flatLists, showShimmer }) => {
                           uri: flatList.urls[0],
                         }}
                         alt="image"
-                        style={{ cursor: "pointer" }}
+                        style={{ cursor: 'pointer' }}
                         onClick={() => setShowGalleryUrls(flatList.urls)}
                       />
                     </AspectRatio>
                     <Center
                       bg="red.500"
                       _dark={{
-                        bg: "red.400",
+                        bg: 'red.400',
                       }}
                       _text={{
-                        color: "red.50",
-                        fontWeight: "700",
-                        fontSize: "xs",
+                        color: 'red.50',
+                        fontWeight: '700',
+                        fontSize: 'xs',
                       }}
                       position="absolute"
                       bottom="0"
@@ -182,10 +189,10 @@ const FlatCard = ({ flatLists, showShimmer }) => {
                         <Text
                           fontSize="xs"
                           _light={{
-                            color: "red.500",
+                            color: 'red.500',
                           }}
                           _dark={{
-                            color: "red.400",
+                            color: 'red.400',
                           }}
                           fontWeight="500"
                           ml="-0.5"
@@ -203,17 +210,34 @@ const FlatCard = ({ flatLists, showShimmer }) => {
                         </Box>
                       )}
                     </HStack>
-                    <Flex direction="row" justify={"space-between"}>
+                    <Flex direction="row" justify={'space-between'}>
                       <Text fontWeight="400">
-                        <b>&#8377; {isLoggedIn ? flatList.rent : "XXXX"}</b>
+                        <b>
+                          {isLoggedIn
+                            ? flatList.email ?? 'Sample@gmail.com'
+                            : 'XYZABC@gmail.com'}
+                        </b>
+                      </Text>
+                      <Text fontWeight="400">
+                        +91{' '}
+                        <b>
+                          {isLoggedIn
+                            ? flatList.phone ?? '9876543210'
+                            : '98760XXXXX'}
+                        </b>
+                      </Text>
+                    </Flex>
+                    <Flex direction="row" justify={'space-between'}>
+                      <Text fontWeight="400">
+                        <b>&#8377; {isLoggedIn ? flatList.rent : 'XXXX'}</b>
                         /month
                       </Text>
                       <Text fontWeight="400">
-                        Deposit{" "}
-                        <b>&#8377;{isLoggedIn ? flatList.deposit : "XXXXX"}</b>
+                        Deposit{' '}
+                        <b>&#8377;{isLoggedIn ? flatList.deposit : 'XXXXX'}</b>
                       </Text>
                       <Text fontWeight="400">
-                        {isLoggedIn ? flatList.bhk : "X"} BHK
+                        {isLoggedIn ? flatList.bhk : 'X'} BHK
                       </Text>
                     </Flex>
                     <HStack
@@ -229,11 +253,11 @@ const FlatCard = ({ flatLists, showShimmer }) => {
                           <Text
                             color="coolGray.600"
                             _dark={{
-                              color: "warmGray.200",
+                              color: 'warmGray.200',
                             }}
                             fontWeight="400"
                           >
-                            {isLoggedIn ? "6" : "X"} mins ago
+                            {isLoggedIn ? '6' : 'X'} mins ago
                           </Text>
                         </Box>
                         {isLoggedIn && (
@@ -251,7 +275,7 @@ const FlatCard = ({ flatLists, showShimmer }) => {
               );
             })}
           </Flex>
-          <Flex direction="row" flexWrap={"wrap"} mb={3}>
+          <Flex direction="row" flexWrap={'wrap'} mb={3}>
             {[...Array(totalPages)].map((page, index) => {
               return (
                 <Button
@@ -260,7 +284,7 @@ const FlatCard = ({ flatLists, showShimmer }) => {
                   }}
                   mr={2}
                   variant={
-                    range.start === index * pageSize ? "solid" : "outline"
+                    range.start === index * pageSize ? 'solid' : 'outline'
                   }
                 >
                   {index + 1}
@@ -271,7 +295,7 @@ const FlatCard = ({ flatLists, showShimmer }) => {
         </Box>
       )}
       {galleryUrls?.length > 0 && (
-        <Box style={{ position: "absolute", top: "50px" }}>
+        <Box style={{ position: 'absolute', top: '50px' }}>
           <Gallery urls={galleryUrls} setShowGalleryUrls={setShowGalleryUrls} />
         </Box>
       )}
