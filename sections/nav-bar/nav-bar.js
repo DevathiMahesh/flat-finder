@@ -51,9 +51,16 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
   return (
     <Box>
       <ScrollView>
-        <HStack space={0} w="100%" px="0">
-          <Flex direction="row" h="20" justify={"space-between"}>
-            <Center w="20rem">
+        <HStack space={0} px="0">
+          <Flex
+            direction="row"
+            h="20"
+            w="100%"
+            pl="10"
+            pr="10"
+            justify={"space-between"}
+          >
+            <Center>
               <Image
                 source={logo}
                 alt="logo"
@@ -63,7 +70,7 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
                 onClick={() => window.location.reload()}
               />
             </Center>
-            <Center w="40rem">
+            <Center>
               <Flex direction="row">
                 <Select
                   selectedValue={city}
@@ -104,7 +111,7 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
                 </Button>
               </Flex>
             </Center>
-            <Center w="80px">
+            <Center>
               <Button colorScheme={"red"}>
                 <Link
                   to="/create-post"
@@ -114,7 +121,7 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
                 </Link>
               </Button>
             </Center>
-            <Center w="20rem">
+            <Center>
               <Popover
                 trigger={(triggerProps) => {
                   return (

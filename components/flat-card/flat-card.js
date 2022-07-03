@@ -96,7 +96,7 @@ const FlatCard = ({ flatLists, showShimmer }) => {
           direction="row"
           flexWrap={"wrap"}
           justify="space-around"
-          mr={"-10"}
+          ml="10"
           mt={"10"}
         >
           <CardShimmer />
@@ -116,7 +116,7 @@ const FlatCard = ({ flatLists, showShimmer }) => {
             direction="row"
             flexWrap={"wrap"}
             justify="space-around"
-            mr={"-10"}
+            ml={"10"}
             mt={"10"}
           >
             {flatLists.slice(range.start, range.end).map((flatList) => {
