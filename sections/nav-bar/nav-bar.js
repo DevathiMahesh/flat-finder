@@ -151,7 +151,14 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
         <HStack space={0} w="100%" px="0">
           <Flex direction="row" h="20" justify={'space-between'}>
             <Center w="20rem">
-              <Image source={logo} alt="logo" width={180} height={8} />
+              <Image
+                source={logo}
+                alt="logo"
+                width={180}
+                height={8}
+                style={{ cursor: "pointer" }}
+                onClick={() => window.location.reload()}
+              />
             </Center>
             <Center w="40rem">
               <Flex direction="row">
