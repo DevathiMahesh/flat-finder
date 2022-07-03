@@ -46,13 +46,12 @@ export default function FlatFinderMain() {
 
   return (
     <NativeBaseProvider>
-      <NavBar setActivePage={setActivePage} />
+      <NavBar
+        setActivePage={setActivePage}
+        fetchFlatsOnSearch={fetchFlatsOnSearch}
+      />
       {activePage === 'home' && (
         <>
-          <NavBar
-            setActivePage={setActivePage}
-            fetchFlatsOnSearch={fetchFlatsOnSearch}
-          />
           <FlatCard flatLists={flatLists} showShimmer={showShimmer} />
         </>
       )}

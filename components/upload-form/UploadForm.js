@@ -198,7 +198,7 @@ const UploadForm = () => {
               Size (in Sqft.)
             </FormControl.Label>
             <Input
-              placeholder="Bangalore"
+              placeholder="500"
               onChangeText={(value) => setData({ ...formData, size: value })}
             />
             {'size' in errors ? (
@@ -216,7 +216,7 @@ const UploadForm = () => {
               BHK
             </FormControl.Label>
             <Input
-              placeholder="2BHK"
+              placeholder="2"
               onChangeText={(value) => setData({ ...formData, bhk: value })}
             />
             {'bhk' in errors ? (
