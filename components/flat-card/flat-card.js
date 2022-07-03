@@ -18,7 +18,6 @@ import {
 import React, { useState } from 'react';
 import CardShimmer from './CardShimmer';
 import FlatCardFallback from '../error/FlatCardFallback';
-import Heart from 'react-heart';
 import FlatService from '../../services/flats.services';
 import Gallery from './Gallery';
 import { getLoggedInStatus } from '../../utils/flats.utils';
