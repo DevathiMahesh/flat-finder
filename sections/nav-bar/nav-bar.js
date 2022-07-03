@@ -153,8 +153,8 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
             direction="row"
             h="20"
             w="100%"
-            pl="5"
-            pr="5"
+            pl="10"
+            pr="10"
             justify={'space-between'}
           >
             <Center>

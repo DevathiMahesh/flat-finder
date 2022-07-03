@@ -3,8 +3,10 @@ import {
   Button,
   Center,
   Divider,
+  Flex,
   FormControl,
   Heading,
+  Image,
   Input,
   NativeBaseProvider,
   useToast,
@@ -13,7 +15,8 @@ import {
 import React, { useState } from 'react';
 import FlatService from '../../services/flats.services';
 import { storage } from '../../firebase.config';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
+import logo from '../../assets/logo.png';
 
 const UploadForm = () => {
   const [formData, setData] = React.useState({});
@@ -94,10 +97,23 @@ const UploadForm = () => {
     <NativeBaseProvider>
       <Center flex={1} m="5">
         {isSubmitted && <Navigate replace to="/home" />}
-        <Heading mb="4" style={{ color: '#ff585d' }}>
+        <Flex w="90%" pb="4" justify={'space-between'} direction="row">
+          <Image
+            source={logo}
+            alt="logo"
+            width={180}
+            style={{ cursor: 'pointer' }}
+          />
+          <Button colorScheme={'red'}>
+            <Link to="/home" style={{ textDecoration: 'none', color: 'white' }}>
+              Go to Homepage
+            </Link>
+          </Button>
+        </Flex>
+        <Divider />
+        <Heading mb="4" mt="3" style={{ color: '#484848' }}>
           Put your Home on Rent
         </Heading>
-        <Divider />
         <VStack width="90%" mx="3" maxW="300px" mt="2">
           <FormControl isRequired isInvalid={'name' in errors}>
             <FormControl.Label
