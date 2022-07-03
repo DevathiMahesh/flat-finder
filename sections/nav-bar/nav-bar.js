@@ -2,30 +2,27 @@ import {
   Box,
   Button,
   Center,
-  ChevronDownIcon,
   Flex,
   HStack,
   Image,
-  Input,
   Popover,
   ScrollView,
   Select,
   useToast,
   Text,
-} from "native-base";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Pressable } from "react-native";
-import logo from "../../assets/logo.png";
-import profile from "../../assets/profile.svg";
-import Login from "../Login/Login";
-import { cityItems, areaItems, menuItems } from "../../utils/flats.utils";
-import { signOut } from "firebase/auth";
-import { auth } from "../../firebase.config";
+} from 'native-base';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import logo from '../../assets/logo.png';
+import profile from '../../assets/profile.svg';
+import Login from '../Login/Login';
+import { cityItems, areaItems, menuItems } from '../../utils/flats.utils';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../firebase.config';
 
 const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
-  const [area, setArea] = useState("");
-  const [city, setCity] = useState("");
+  const [area, setArea] = useState('');
+  const [city, setCity] = useState('');
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const toast = useToast();
@@ -48,7 +45,7 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem('token')) {
       setIsLoggedIn(true);
     }
   }, []);
@@ -63,7 +60,7 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
             w="100%"
             pl="10"
             pr="10"
-            justify={"space-between"}
+            justify={'space-between'}
           >
             <Center>
               <Image
@@ -71,7 +68,7 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
                 alt="logo"
                 width={180}
                 height={8}
-                style={{ cursor: "pointer" }}
+                style={{ cursor: 'pointer' }}
                 onClick={() => window.location.reload()}
               />
             </Center>
@@ -84,7 +81,7 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
                   placeholder="Choose One..."
                   onValueChange={(itemValue) => {
                     setCity(itemValue);
-                    setArea("");
+                    setArea('');
                   }}
                   mr="2"
                 >
@@ -115,10 +112,10 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
                   Search
                 </Button>
                 {isLoggedIn && (
-                  <Button colorScheme={"red"}>
+                  <Button colorScheme={'red'}>
                     <Link
                       to="/create-post"
-                      style={{ textDecoration: "none", color: "white" }}
+                      style={{ textDecoration: 'none', color: 'white' }}
                     >
                       Add Post
                     </Link>
@@ -135,7 +132,7 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
                       {...triggerProps}
                       colorScheme="white"
                       style={{
-                        border: "1.5px solid #ff585d",
+                        border: '1.5px solid #ff585d',
                       }}
                     >
                       <img src={profile} alt="logo" />
@@ -150,10 +147,19 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
                         <Button mb="2">
                           <Link
                             to="/profile"
-                            style={{ textDecoration: "none", color: "white" }}
-                            onClick={() => setActivePage("")}
+                            style={{ textDecoration: 'none', color: 'white' }}
+                            onClick={() => setActivePage('')}
                           >
                             Profile
+                          </Link>
+                        </Button>
+                        <Button mb="2">
+                          <Link
+                            to="/my-posts"
+                            style={{ textDecoration: 'none', color: 'white' }}
+                            onClick={() => setActivePage('')}
+                          >
+                            My Posts
                           </Link>
                         </Button>
                         <Button onPress={handleLogOut}>Logout</Button>
