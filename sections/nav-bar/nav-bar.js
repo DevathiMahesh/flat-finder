@@ -10,6 +10,8 @@ import {
   Popover,
   ScrollView,
   Select,
+  useToast,
+  Text,
 } from "native-base";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -18,12 +20,15 @@ import logo from "../../assets/logo.png";
 import profile from "../../assets/profile.svg";
 import Login from "../Login/Login";
 import { cityItems, areaItems, menuItems } from "../../utils/flats.utils";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase.config";
 
 const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
   const [area, setArea] = useState("");
   const [city, setCity] = useState("");
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const toast = useToast();
 
   const handleLogOut = () => {
     setIsLoggedIn(false);
@@ -106,21 +111,22 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
                     />
                   ))}
                 </Select>
-                <Button onPress={() => fetchFlatsOnSearch(city, area)}>
+                <Button onPress={() => fetchFlatsOnSearch(city, area)} mr={2}>
                   Search
                 </Button>
+                {isLoggedIn && (
+                  <Button colorScheme={"red"}>
+                    <Link
+                      to="/create-post"
+                      style={{ textDecoration: "none", color: "white" }}
+                    >
+                      Add Post
+                    </Link>
+                  </Button>
+                )}
               </Flex>
             </Center>
-            <Center>
-              <Button colorScheme={"red"}>
-                <Link
-                  to="/create-post"
-                  style={{ textDecoration: "none", color: "white" }}
-                >
-                  Add Post
-                </Link>
-              </Button>
-            </Center>
+            {/* <Center></Center> */}
             <Center>
               <Popover
                 trigger={(triggerProps) => {
@@ -141,13 +147,14 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
                   <Popover.Header>
                     {isLoggedIn ? (
                       <>
-                        <Button
-                          onPress={() => {
-                            setActivePage("profile");
-                          }}
-                          mb="2"
-                        >
-                          Profile
+                        <Button mb="2">
+                          <Link
+                            to="/profile"
+                            style={{ textDecoration: "none", color: "white" }}
+                            onClick={() => setActivePage("")}
+                          >
+                            Profile
+                          </Link>
                         </Button>
                         <Button onPress={handleLogOut}>Logout</Button>
                       </>

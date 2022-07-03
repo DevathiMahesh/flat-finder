@@ -9,8 +9,8 @@ export default function FlatCardFallback() {
         <Image
           source={require("../../assets/fallback-banner.png")}
           alt="Fallback Banner"
-          width="80%"
-          height="350px"
+          width="70%"
+          height="370px"
           marginTop="100px"
         />
       </Center>

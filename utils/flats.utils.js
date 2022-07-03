@@ -39,6 +39,22 @@ export const areaItems = {
       label: "HSR Layout",
       value: "HSR Layout",
     },
+    {
+      label: "Domlur",
+      value: "Domlur",
+    },
+    {
+      label: "Indira Nagar",
+      value: "Indira Nagar",
+    },
+    {
+      label: "Kalyan Nagar",
+      value: "kalyan Nagar",
+    },
+    {
+      label: "HAL",
+      value: "HAL",
+    },
   ],
   Mumbai: [
     { label: "Andheri", value: "Andheri" },
