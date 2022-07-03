@@ -9,10 +9,10 @@ import {
   Image,
   Stack,
   Text,
-} from "native-base";
-import React, { useState } from "react";
-import CardShimmer from "./CardShimmer";
-import FlatCardFallback from "../error/FlatCardFallback";
+} from 'native-base';
+import React, { useState } from 'react';
+import CardShimmer from './CardShimmer';
+import FlatCardFallback from '../error/FlatCardFallback';
 
 const FlatCard = ({ flatLists, showShimmer }) => {
   return (
@@ -21,10 +21,10 @@ const FlatCard = ({ flatLists, showShimmer }) => {
       {showShimmer ? (
         <HStack
           direction="row"
-          flexWrap={"wrap"}
+          flexWrap={'wrap'}
           justify="space-around"
-          mr={"-10"}
-          mt={"10"}
+          mr={'-10'}
+          mt={'10'}
         >
           <CardShimmer />
           <CardShimmer />
@@ -41,10 +41,10 @@ const FlatCard = ({ flatLists, showShimmer }) => {
         <Box display="flex" alignItems="center">
           <Flex
             direction="row"
-            flexWrap={"wrap"}
+            flexWrap={'wrap'}
             justify="space-around"
-            mr={"-10"}
-            mt={"10"}
+            mr={'-10'}
+            mt={'10'}
           >
             {flatLists.map((flatList) => {
               return (
@@ -55,18 +55,19 @@ const FlatCard = ({ flatLists, showShimmer }) => {
                   borderColor="coolGray.200"
                   borderWidth="1"
                   _dark={{
-                    borderColor: "coolGray.600",
-                    backgroundColor: "gray.700",
+                    borderColor: 'coolGray.600',
+                    backgroundColor: 'gray.700',
                   }}
                   _web={{
                     shadow: 2,
                     borderWidth: 0,
                   }}
                   _light={{
-                    backgroundColor: "gray.50",
+                    backgroundColor: 'gray.50',
                   }}
                   mb="10"
                   mr="10"
+                  key={flatList.id}
                 >
                   <Box>
                     <AspectRatio w="100%" ratio={16 / 9}>
@@ -80,12 +81,12 @@ const FlatCard = ({ flatLists, showShimmer }) => {
                     <Center
                       bg="red.500"
                       _dark={{
-                        bg: "red.400",
+                        bg: 'red.400',
                       }}
                       _text={{
-                        color: "red.50",
-                        fontWeight: "700",
-                        fontSize: "xs",
+                        color: 'red.50',
+                        fontWeight: '700',
+                        fontSize: 'xs',
                       }}
                       position="absolute"
                       bottom="0"
@@ -103,10 +104,10 @@ const FlatCard = ({ flatLists, showShimmer }) => {
                       <Text
                         fontSize="xs"
                         _light={{
-                          color: "red.500",
+                          color: 'red.500',
                         }}
                         _dark={{
-                          color: "red.400",
+                          color: 'red.400',
                         }}
                         fontWeight="500"
                         ml="-0.5"
@@ -115,7 +116,7 @@ const FlatCard = ({ flatLists, showShimmer }) => {
                         {flatList.area}, {flatList.city}
                       </Text>
                     </Stack>
-                    <Flex direction="row" justify={"space-between"}>
+                    <Flex direction="row" justify={'space-between'}>
                       <Text fontWeight="400">
                         <b>&#8377; {flatList.rent}</b>/month
                       </Text>
@@ -133,7 +134,7 @@ const FlatCard = ({ flatLists, showShimmer }) => {
                         <Text
                           color="coolGray.600"
                           _dark={{
-                            color: "warmGray.200",
+                            color: 'warmGray.200',
                           }}
                           fontWeight="400"
                         >
