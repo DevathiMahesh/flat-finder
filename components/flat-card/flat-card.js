@@ -9,12 +9,83 @@ import {
   Image,
   Stack,
   Text,
+  Button,
+  VStack,
+  Switch,
+  Badge,
 } from 'native-base';
 import React, { useState } from 'react';
 import CardShimmer from './CardShimmer';
 import FlatCardFallback from '../error/FlatCardFallback';
+import Heart from 'react-heart';
+import FlatService from '../../services/flats.services';
+
+const HeartComponent = ({ flatObj }) => {
+  const [currentLikes, setCurrentLikes] = useState(flatObj.likes ?? 0);
+  const [isClick, setClick] = useState(false);
+  const handleUpdateLikes = (likes) => {
+    FlatService.updateFlat(flatObj.id, { ...flatObj, likes: likes });
+  };
+  return (
+    <>
+      <Flex
+        style={{ width: '1rem' }}
+        direction="column"
+        justify="center"
+        alignItems="center"
+      >
+        <Heart
+          isActive={isClick}
+          onClick={() => {
+            if (isClick) {
+              setCurrentLikes(currentLikes - 1);
+              handleUpdateLikes(currentLikes - 1);
+            } else {
+              setCurrentLikes(currentLikes + 1);
+              handleUpdateLikes(currentLikes + 1);
+            }
+
+            setClick(!isClick);
+          }}
+        />
+        <Text>{currentLikes}</Text>
+      </Flex>
+    </>
+  );
+};
+
+const AvailableComp = ({ isAvailable, flatObj }) => {
+  const [currentAvailable, setCurrentAvailable] = useState(isAvailable);
+  const handleUpdateAvailable = (temp) => {
+    FlatService.updateFlat(flatObj.id, { ...flatObj, available: temp });
+  };
+  return (
+    <Flex direction="row" justify="center" alignItems="center" ml="55px">
+      <Badge mr={2} colorScheme={currentAvailable ? 'success' : 'danger'}>
+        {currentAvailable ? 'Available' : 'Not Available'}
+      </Badge>
+      {currentAvailable && (
+        <Switch
+          isChecked={currentAvailable}
+          colorScheme="emerald"
+          onToggle={() => {
+            handleUpdateAvailable(!currentAvailable);
+            setCurrentAvailable(!currentAvailable);
+          }}
+        />
+      )}
+    </Flex>
+  );
+};
 
 const FlatCard = ({ flatLists, showShimmer }) => {
+  const [range, setRange] = useState({ start: 0, end: 6 });
+  const pageSize = 6;
+  const totalPages = parseInt(Math.ceil(flatLists.length / 6));
+  const onPageChange = (pageNum) => {
+    setRange({ start: pageNum * pageSize, end: pageNum * pageSize + pageSize });
+  };
+
   return (
     <>
       <Divider />
@@ -46,9 +117,10 @@ const FlatCard = ({ flatLists, showShimmer }) => {
             ml={'10'}
             mt={'10'}
           >
-            {flatLists.map((flatList) => {
+            {flatLists.slice(range.start, range.end).map((flatList) => {
               return (
                 <Box
+                  key={flatList.id}
                   w={80}
                   rounded="lg"
                   overflow="hidden"
@@ -67,7 +139,6 @@ const FlatCard = ({ flatLists, showShimmer }) => {
                   }}
                   mb="10"
                   mr="10"
-                  key={flatList.id}
                 >
                   <Box>
                     <AspectRatio w="100%" ratio={16 / 9}>
@@ -97,25 +168,30 @@ const FlatCard = ({ flatLists, showShimmer }) => {
                     </Center>
                   </Box>
                   <Stack p="4" space={3}>
-                    <Stack space={2}>
-                      <Heading size="md" ml="-1">
-                        {flatList.name}
-                      </Heading>
-                      <Text
-                        fontSize="xs"
-                        _light={{
-                          color: 'red.500',
-                        }}
-                        _dark={{
-                          color: 'red.400',
-                        }}
-                        fontWeight="500"
-                        ml="-0.5"
-                        mt="-1"
-                      >
-                        {flatList.area}, {flatList.city}
-                      </Text>
-                    </Stack>
+                    <HStack justifyContent="space-between">
+                      <VStack space={2}>
+                        <Heading size="md" ml="-1">
+                          {flatList.name}
+                        </Heading>
+                        <Text
+                          fontSize="xs"
+                          _light={{
+                            color: 'red.500',
+                          }}
+                          _dark={{
+                            color: 'red.400',
+                          }}
+                          fontWeight="500"
+                          ml="-0.5"
+                          mt="-1"
+                        >
+                          {flatList.area}, {flatList.city}
+                        </Text>
+                      </VStack>
+                      <Box>
+                        <HeartComponent flatObj={flatList} key={flatList?.id} />
+                      </Box>
+                    </HStack>
                     <Flex direction="row" justify={'space-between'}>
                       <Text fontWeight="400">
                         <b>&#8377; {flatList.rent}</b>/month
@@ -130,20 +206,48 @@ const FlatCard = ({ flatLists, showShimmer }) => {
                       space={4}
                       justifyContent="space-between"
                     >
-                      <HStack alignItems="center">
-                        <Text
-                          color="coolGray.600"
-                          _dark={{
-                            color: 'warmGray.200',
-                          }}
-                          fontWeight="400"
-                        >
-                          6 mins ago
-                        </Text>
+                      <HStack
+                        alignItems="center"
+                        justifyContent="space-between"
+                      >
+                        <Box>
+                          <Text
+                            color="coolGray.600"
+                            _dark={{
+                              color: 'warmGray.200',
+                            }}
+                            fontWeight="400"
+                          >
+                            6 mins ago
+                          </Text>
+                        </Box>
+                        <Box>
+                          <AvailableComp
+                            isAvailable={flatList?.available}
+                            flatObj={flatList}
+                          />
+                        </Box>
                       </HStack>
                     </HStack>
                   </Stack>
                 </Box>
+              );
+            })}
+          </Flex>
+          <Flex direction="row" flexWrap={'wrap'} mb={3}>
+            {[...Array(totalPages)].map((page, index) => {
+              return (
+                <Button
+                  onPress={() => {
+                    onPageChange(index);
+                  }}
+                  mr={2}
+                  variant={
+                    range.start === index * pageSize ? 'solid' : 'outline'
+                  }
+                >
+                  {index + 1}
+                </Button>
               );
             })}
           </Flex>
