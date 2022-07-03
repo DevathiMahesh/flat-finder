@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import { Center, NativeBaseProvider, extendTheme } from "native-base";
-import Login from "./Login/Login";
-import NavBar from "./Nav-Bar/nav-bar";
-import FlatCard from "../components/flat-card/flat-card";
-import Profile from "./Profile/profile";
-import FlatService from "../services/flats.services";
+import { Center, NativeBaseProvider, extendTheme } from 'native-base';
+import Login from './Login/Login';
+import NavBar from './Nav-Bar/nav-bar';
+import FlatCard from '../components/flat-card/flat-card';
+import Profile from './Profile/profile';
+import FlatService from '../services/flats.services';
 
 // Define the config
 const config = {
   useSystemColorMode: false,
-  initialColorMode: "dark",
+  initialColorMode: 'dark',
 };
 
 // extend the theme
 export const theme = extendTheme({ config });
 
 export default function FlatFinderMain() {
-  const [activePage, setActivePage] = useState("home");
+  const [activePage, setActivePage] = useState('home');
   const [flatLists, setFlatLists] = useState([]);
   const [showShimmer, setShowShimmer] = useState(true);
 
@@ -46,7 +46,8 @@ export default function FlatFinderMain() {
 
   return (
     <NativeBaseProvider>
-      {activePage === "home" && (
+      <NavBar setActivePage={setActivePage} />
+      {activePage === 'home' && (
         <>
           <NavBar
             setActivePage={setActivePage}
@@ -55,7 +56,7 @@ export default function FlatFinderMain() {
           <FlatCard flatLists={flatLists} showShimmer={showShimmer} />
         </>
       )}
-      {activePage === "profile" && <Profile setActivePage={setActivePage} />}
+      {activePage === 'profile' && <Profile setActivePage={setActivePage} />}
     </NativeBaseProvider>
   );
 }

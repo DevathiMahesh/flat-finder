@@ -12,6 +12,7 @@ import {
   Select,
 } from 'native-base';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Pressable } from 'react-native';
 import logo from '../../assets/logo.png';
 import profile from '../../assets/profile.svg';
@@ -117,7 +118,6 @@ const menuItems = ['Profile', 'Settings'];
 const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
   const [area, setArea] = useState('');
   const [city, setCity] = useState('');
-  const [menuValue, setMenuValue] = useState(null);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -166,10 +166,11 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
                   }}
                   mr="2"
                 >
-                  {cityItems.map((cityItem) => (
+                  {cityItems.map((cityItem, index) => (
                     <Select.Item
                       label={cityItem.label}
                       value={cityItem.value}
+                      key={index}
                     />
                   ))}
                 </Select>
@@ -192,6 +193,16 @@ const NavBar = ({ setActivePage, fetchFlatsOnSearch }) => {
                   Search
                 </Button>
               </Flex>
+            </Center>
+            <Center w="80px">
+              <Button colorScheme={'red'}>
+                <Link
+                  to="/create-post"
+                  style={{ textDecoration: 'none', color: 'white' }}
+                >
+                  Add Post
+                </Link>
+              </Button>
             </Center>
             <Center w="20rem">
               <Popover
